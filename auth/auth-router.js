@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../api/config/secrets');
 const USER = require('../api/users/modal');
 
-function generateToken() {
+function generateToken(user) {
   const payload = {
     subject: user.id,
     username: user.username
@@ -30,19 +30,27 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   // implement login
+  console.log(req.body);
   let { username, password } = req.body;
   if (username && password) {
     USER.findby({ username })
       .then(user => {
+        console.log(user, 'USSSEERRR');
         if (user && bcrypt.compareSync(password, user.password)) {
           const token = generateToken(user);
           res.status(200).json({
             message: 'Login Successful',
             token
           });
+        } else {
+          res.status(500).json({ Error: 'Login error' });
         }
       })
-      .catch();
+      .catch(({ name, message, stack, code }) =>
+        res.status(500).json({ name, message, stack, code })
+      );
+  } else {
+    res.status(400).json({ message: 'invalid username or password' });
   }
 });
 
