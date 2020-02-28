@@ -40,11 +40,21 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] What is the purpose of using _sessions_?
 
+Webpages have no memories. A user going from page to page will be treated by the website as a completely new visitor. Session cookies enable the website you are visiting to keep track of your movement from page to page so you don't get asked for the same information you've already given to the site.
+
 - [ ] What does bcrypt do to help us store passwords in a secure manner.
+
+Uses an algorithm to hash our passwords
 
 - [ ] What does bcrypt do to slow down attackers?
 
+Uses Hashing algorithms that are one way functions. They turn any amount of data into a fixed-length “fingerprint” that cannot be reversed. They also have the property that if the input changes by even a tiny bit, the resulting hash is completely different
+
 - [ ] What are the three parts of the JSON Web Token?
+
+Header
+Payload
+Signature
 
 ## Minimum Viable Product
 
